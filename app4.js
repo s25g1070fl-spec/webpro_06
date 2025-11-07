@@ -31,9 +31,51 @@ app.get("/omikuji2", (req, res) => {
   const num = Math.floor( Math.random() * 6 + 1 );
   let luck = '';
   if( num==1 ) luck = '大吉';
-  else if( num==2 ) luck = '中吉';
+  if( num==2 ) luck = '中吉';
+  if( num==3 ) luck = '吉';
+  if( num==4 ) luck = '末吉';
+  if( num==5 ) luck = '小吉';
+  else if( num==6 ) luck = '凶';
+
+
+
 
   res.render( 'omikuji2', {result:luck} );
 });
+
+
+app.get("/omikuji3", (req, res) => {
+  const num = Math.floor( Math.random() * 6 + 1 );
+  let luck = '';
+  if( num==1 ) luck = '大吉';
+  if( num==2 ) luck = '中吉';
+  if( num==3 ) luck = '吉';
+  if( num==4 ) luck = '末吉';
+  if( num==5 ) luck = '小吉';
+  else if( num==6 ) luck = '凶';
+
+
+
+
+  res.render( 'omikuji2', {result:luck} );
+});
+
+
+
+
+app.get("/english", (req, res) => {
+  res.render('greeting', { message:"Good Morning!!"});
+});
+
+app.get("/france", (req, res) => {
+  res.render('greeting', { message:"Bonjour"});
+});
+
+app.get("/germany", (req, res) => {
+  res.render('greeting', { message:"Guten Morgen"});
+});
+
+
+
 
 app.listen(8080, () => console.log("Example app listening on port 8080!"));
