@@ -65,6 +65,14 @@ app.get("/keiyo2/edit/:number", (req, res) => {
   res.render('keiyo2_edit', {id: number, data: detail} );
 });
 
+// Delete
+app.get("/keiyo2/edit/:number", (req, res) => {
+  // 本来ならここにDBとのやり取りが入る
+  const number = req.params.number;
+  const detail = station2[ number ];
+  res.render('keiyo2_edit', {id: number, data: detail} );
+});
+
 // Update
 app.post("/keiyo2/update/:number", (req, res) => {
   // 本来は変更する番号が存在するか，各項目が正しいか厳重にチェックする
