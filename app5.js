@@ -34,15 +34,6 @@ app.get("/keiyo2/:number", (req, res) => {
   res.render('keiyo2_detail', {id: number, data: detail} );
 });
 
-// Delete
-app.get("/keiyo2/delete/:number", (req, res) => {
-  // 本来は削除の確認ページを表示する
-  // 本来は削除する番号が存在するか厳重にチェックする
-  // 本来ならここにDBとのやり取りが入る
-  station2.splice( req.params.number, 1 );
-  res.redirect('/keiyo2' );
-});
-
 // Create
 app.post("/keiyo2", (req, res) => {
   // 本来ならここにDBとのやり取りが入る
@@ -65,12 +56,16 @@ app.get("/keiyo2/edit/:number", (req, res) => {
   res.render('keiyo2_edit', {id: number, data: detail} );
 });
 
-// Delete
-app.get("/keiyo2/edit/:number", (req, res) => {
+// DeleteCheck
+app.get("/keiyo2/deleteCheck/:number", (req, res) => {
+  // 本来は削除の確認ページを表示する
+  // 本来は削除する番号が存在するか厳重にチェックする
   // 本来ならここにDBとのやり取りが入る
   const number = req.params.number;
   const detail = station2[ number ];
-  res.render('keiyo2_edit', {id: number, data: detail} );
+  res.render('keiyo2_delete', {id: number, data: detail} );
+  // station2.splice( req.params.number, 1 );
+  // res.redirect('/keiyo2' );
 });
 
 // Update
@@ -83,6 +78,14 @@ app.post("/keiyo2/update/:number", (req, res) => {
   station2[req.params.number].passengers = req.body.passengers;
   station2[req.params.number].distance = req.body.distance;
   console.log( station2 );
+  res.redirect('/keiyo2' );
+});
+
+//Delete
+app.post("/keiyo2/delete/:number", (req, res) => {
+  // 本来は変更する番号が存在するか，各項目が正しいか厳重にチェックする
+  // 本来ならここにDBとのやり取りが入る
+  station2.splice( req.params.number, 1 );
   res.redirect('/keiyo2' );
 });
 
