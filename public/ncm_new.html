@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>BGMサイトの新規登録</title>
+</head>
+<body>
+    <h1>BGMサイトの新規登録</h1>
+    <form action="/ncm" method="POST">
+        <!-- フォームの action を /ncm に変更 -->
+
+        <label for="name">サイト名:</label><br>
+        <input type="text" id="name" name="name" required size="50"><br>
+        <br>
+
+        <label for="url">URL:</label><br>
+        <input type="text" id="url" name="url" required size="50"><br>
+        <br>
+
+        <label for="commercialUse">商用利用:</label><br>
+        <input type="text" id="commercialUse" name="commercialUse" required size="50"><br>
+        <br>
+
+        <label for="credit">クレジット表記:</label><br>
+        <input type="text" id="credit" name="credit" required size="50"><br>
+        <br>
+
+        <label for="summary">概要:</label><br>
+        <textarea id="summary" name="summary" rows="4" cols="50" required></textarea><br>
+        <br>
+
+        <input type="submit" value="登録する">
+        <a href="/ncm">キャンセル</a>
+        <!-- キャンセル時のリンク先も /ncm に変更 -->
+    </form>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title><%= data.name %> の削除確認</title>
+</head>
+<body>
+  <h1>削除確認</h1>
+  <h2>「<%= data.name %>」を本当に削除しますか？</h2>
+  <p>この操作は元に戻せません。</p>
+
+  <h3>削除するデータの内容</h3>
+  <table>
+    <tr><th>項目</th><th>データ</th></tr>
+    <tr><td>サイト名</td><td><%= data.name %></td></tr>
+    <tr><td>URL</td><td><%= data.url %></td></tr>
+    <tr><td>商用利用</td><td><%= data.commercialUse %></td></tr>
+    <tr><td>クレジット表記</td><td><%= data.credit %></td></tr>
+    <tr><td>概要</td><td><%= data.summary %></td></tr>
+  </table>
+
+  <hr>
+
+  <form action="/ncm/delete/<%= id %>" method="POST">
+    <button type="submit">削除</button>
+  </form>
+
+  <br>
+
+  <a href="/ncm/<%= id %>">キャンセル（詳細に戻る）</a>
+
+</body>
+</html>

@@ -5,6 +5,11 @@ app.set('view engine', 'ejs');
 app.use("/public", express.static(__dirname + "/public"));
 app.use(express.urlencoded({ extended: true }));
 
+
+
+
+
+
 let station2 = [
   { id:1, code:"JE01", name:"東京駅", change:"総武本線，中央線，etc", passengers:403831, distance:0 },
   { id:2, code:"JE02", name:"八丁堀駅", change:"日比谷線", passengers:31071, distance:1.2 },
@@ -90,64 +95,145 @@ app.post("/keiyo2/delete/:number", (req, res) => {
 });
 
 
+let ncm = [
+  { 
+    id: 1, 
+    name: "効果音ラボ",
+    url: "https://soundeffect-lab.info/",
+    commercialUse: "可", // 商用利用
+    credit: "任意", // クレジット表記
+    summary: "高品質な効果音が豊富。カテゴリが分かりやすい。" 
+  },
+  { 
+    id: 2, 
+    name: "DOVA-SYNDROME",
+    url: "https://dova-s.jp/",
+    commercialUse: "可",
+    credit: "任意(作曲，作成者の利用条件が優先される)",
+    summary: "日本最大級のBGM・効果音サイト。楽曲数が圧倒的。"
+  },
+  { 
+    id: 3, 
+    name: "魔王魂",
+    url: "https://maou.audio/",
+    commercialUse: "可",
+    credit: "任意",
+    summary: "ゲームや戦闘系のBGM・効果音が充実。歌もの素材もある。"
+  },
+  { 
+    id: 4, 
+    name: "BGMer",
+    url: "https://bgmer.net/",
+    commercialUse: "可",
+    credit: "不要",
+    summary: "雰囲気検索など詳しくなくても使いやすい"
+  },
+  { 
+    id: 5, 
+    name: "甘茶の音楽工房",
+    url: "http://amachamusic.chagasi.com/",
+    commercialUse: "可",
+    credit: "必須ではない．表記内容はサイト名、作曲者名、URLのいずれか一つでOK",
+    summary: "個人制作のサイトで、癒し系など質の高いBGMが豊富。"
+  },
+  { 
+    id: 6, 
+    name: "Youtube Audio Library",
+    url: "https://youtube.com/audiolibrary",
+    commercialUse: "可",
+    credit: "ccマークのあるものは必須",
+    summary: "丸の中にcが二つ書かれたマークがあるものはクレジットが必要である．"
+  },  
+  { 
+    id: 7, 
+    name: "in audio",
+    url: "https://inaudio.org/",
+    commercialUse: "可",
+    credit: "無料の場合「必須」，有料ライセンスがあれば「不要」",
+    summary: "海外のサイト，BPMによる検索などもできそう"
+  },
+  { 
+    id: 8, 
+    name: "Audio Stock",
+    url: "https://audiostock.jp/",
+    commercialUse: "可",
+    credit: "必要なし",
+    summary: "有料のBGM・効果音サイト．期間限定で一部無料ダウンロード可能"
+  },
+];
 
-// app.get("/hello1", (req, res) => {
-//   const message1 = "Hello world";
-//   const message2 = "Bon jour";
-//   res.render('show', { greet1:message1, greet2:message2});
-// });
+// 一覧
+app.get("/ncm", (req, res) => {
+  // 本来ならここにDBとのやり取りが入る
+  res.render('ncm', {data: ncm} );
+});
 
-// app.get("/hello2", (req, res) => {
-//   res.render('show', { greet1:"Hello world", greet2:"Bon jour"});
-// });
+// Create
+app.get("/ncm/create", (req, res) => {
+  res.redirect('/public/ncm_new.html');
+});
 
-// app.get("/icon", (req, res) => {
-//   res.render('icon', { filename:"./public/Apple_logo_black.svg", alt:"Apple Logo"});
-// });
+// Read
+app.get("/ncm/:number", (req, res) => {
+  // 本来ならここにDBとのやり取りが入る
+  const number = req.params.number;
+  const detail = ncm[ number ];
+  res.render('ncm_detail', {id: number, data: detail} );
+});
 
-// app.get("/omikuji1", (req, res) => {
-//   const num = Math.floor( Math.random() * 6 + 1 );
-//   let luck = '';
-//   if( num==1 ) luck = '大吉';
-//   else if( num==2 ) luck = '中吉';
+// Create
+app.post("/ncm", (req, res) => {
+  // 本来ならここにDBとのやり取りが入る
+  const id = ncm.length + 1;
+  const name = req.body.name;
+  const url = req.body.url;
+  const commercialUse = req.body.commercialUse;
+  const credit = req.body.credit;
+  const summary = req.body.summary;
+  ncm.push( { id: id, name: name, url: url, commercialUse: commercialUse, credit: credit ,summary: summary} );
+  console.log( ncm );
+  res.render('ncm', {data: ncm} );
+});
 
-//   res.send( '今日の運勢は' + luck + 'です' );
-// });
+// Edit
+app.get("/ncm/edit/:number", (req, res) => {
+  // 本来ならここにDBとのやり取りが入る
+  const number = req.params.number;
+  const detail = ncm[ number ];
+  res.render('ncm_edit', {id: number, data: detail} );
+});
 
-// app.get("/omikuji2", (req, res) => {
-//   const num = Math.floor( Math.random() * 6 + 1 );
-//   let luck = '';
-//   if( num==1 ) luck = '大吉';
-//   else if( num==2 ) luck = '中吉';
+// DeleteCheck
+app.get("/ncm/deleteCheck/:number", (req, res) => {
+  // 本来は削除の確認ページを表示する
+  // 本来は削除する番号が存在するか厳重にチェックする
+  // 本来ならここにDBとのやり取りが入る
+  const number = req.params.number;
+  const detail = ncm[ number ];
+  res.render('ncm_delete', {id: number, data: detail} );
+  // station2.splice( req.params.number, 1 );
+  // res.redirect('/ncm' );
+});
 
-//   res.render( 'omikuji2', {result:luck} );
-// });
+// Update
+app.post("/ncm/update/:number", (req, res) => {
+  // 本来は変更する番号が存在するか，各項目が正しいか厳重にチェックする
+  // 本来ならここにDBとのやり取りが入る
+  ncm[req.params.number].name = req.body.name;
+  ncm[req.params.number].url = req.body.url;
+  ncm[req.params.number].commercialUse = req.body.commercialUse;
+  ncm[req.params.number].credit = req.body.credit;
+  ncm[req.params.number].summary = req.body.summary;
+  console.log( ncm );
+  res.redirect('/ncm' );
+});
+//Delete
+app.post("/ncm/delete/:number", (req, res) => {
+  // 本来は変更する番号が存在するか，各項目が正しいか厳重にチェックする
+  // 本来ならここにDBとのやり取りが入る
+  ncm.splice( req.params.number, 1 );
+  res.redirect('/ncm' );
+});
 
-// app.get("/janken", (req, res) => {
-//   let hand = req.query.hand;
-//   let win = Number( req.query.win );
-//   let total = Number( req.query.total );
-//   console.log( {hand, win, total});
-//   const num = Math.floor( Math.random() * 3 + 1 );
-//   let cpu = '';
-//   let judgement = '';
-//   if( num==1 ) cpu = 'グー';
-//   else if( num==2 ) cpu = 'チョキ';
-//   else cpu = 'パー';
-//   // ここに勝敗の判定を入れる
-//   // 以下の数行は人間の勝ちの場合の処理なので，
-//   // 判定に沿ってあいこと負けの処理を追加する
-//   judgement = '勝ち';
-//   win += 1;
-//   total += 1;
-//   const display = {
-//     your: hand,
-//     cpu: cpu,
-//     judgement: judgement,
-//     win: win,
-//     total: total
-//   }
-//   res.render( 'janken', display );
-// });
 
 app.listen(8080, () => console.log("Example app listening on port 8080!"));
