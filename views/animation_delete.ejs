@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title><%= data.name %> の削除確認</title>
+</head>
+<body>
+  <h1>削除確認</h1>
+  <h2>「<%= data.name %>」を本当に削除しますか？</h2>
+  <p>この操作は元に戻せません。</p>
+
+  <h3>削除するデータの内容</h3>
+  <table>
+    <tr><th>項目</th><th>データ</th></tr>
+    <tr><td>原則名</td><td><%= data.name %></td></tr>
+    <tr><td>概要</td><td><%= data.summary %></td></tr>
+  </table>
+
+  <hr>
+
+  <form action="/animation/delete/<%= id %>" method="POST">
+    <button type="submit">削除</button>
+  </form>
+
+  <br>
+  <a href="/animation/<%= id %>">キャンセル</a>
+
+</body>
+</html>

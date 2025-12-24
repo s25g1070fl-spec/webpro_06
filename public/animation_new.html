@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>アニメーション原則の新規登録</title>
+</head>
+<body>
+    <h1>アニメーション原則の新規登録</h1>
+    <form action="/animation" method="POST">
+        <label for="name">原則名:</label><br>
+        <input type="text" id="name" name="name" required size="50"><br>
+        <br>
+
+        <label for="summary">概要:</label><br>
+        <textarea id="summary" name="summary" rows="4" cols="50" required></textarea><br>
+        <br>
+
+        <input type="submit" value="登録する">
+        <a href="/animation">キャンセル</a>
+    </form>
+</body>
+</html>

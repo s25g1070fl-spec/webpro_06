@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>アニメーションの12原則</title>
+</head>
+<body>
+  <h1>アニメーションの12原則</h1>
+  <p>ウォルト・ディズニー・スタジオで確立された、アニメーション制作における基本的な12の原則の一覧です。</p>
+
+  <table border="1">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>原則名</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for( let i = 0; i < data.length; i++ ) { %>
+        <% let row = data[i]; %>
+        <tr>
+          <td><%= row.id %></td>
+          <td><a href="/animation/<%= i %>"><%= row.name %></a></td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+
+  <br>
+  <a href="/animation/create">新しい原則を追加する</a>
+
+</body>
+</html>

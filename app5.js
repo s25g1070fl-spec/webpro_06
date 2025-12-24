@@ -401,4 +401,140 @@ app.post("/mc-mods/delete/:number", (req, res) => {
 });
 
 
+
+
+//-------アニメーションの基本原則---------
+let principlesOfAnimation = [
+  { 
+    id: 1, 
+    name: "Squash and Stretch (圧縮と伸縮)",
+    summary: "ボールが跳ねる際に潰れたり伸びたりする表現をヒトなどにも使うこと．やりすぎると海外のカートゥーンアニメのようになる",
+    exampleUrl: "https://youtu.be/haa7n3UGyDc" 
+  },
+  { 
+    id: 2, 
+    name: "Anticipation (予備動作)",
+    summary: "主要なアクションの前に、視聴者にこれから何が起こるかを予感させる小さな動き。ジャンプする前の屈伸など。",
+    exampleUrl: "https://youtu.be/F8OtE60T8yU"
+  },
+  {
+    id: 3,
+    name: "Staging (演出)",
+    summary: "観客の視線を誘導し、状況を明確に伝える。視線誘導を意識する。関係のないものを画面に置かないなど",
+    exampleUrl: "https://youtu.be/u-SXLaQGg50"
+  },
+  {
+    id: 4,
+    name: "Straight Ahead Action and Pose to Pose(ストレート・アヘッド と ポーズ・トゥ・ポーズ )",
+    summary: "ストレートアヘッド：冒頭から一枚ずつ絵を描いていく手法.ポーズトゥポーズ：先に大事な絵を描いてから間を中割りでつないでいく手法",
+    exampleUrl: "https://youtu.be/v8quCbt4C-c"
+  },
+  {
+    id: 5,
+    name: "Follow Through and Overlapping Action(フォロースルー と オーバーラップ)",
+    summary: "本体が止まっても、付属物は遅れて止まる（慣性）",
+    exampleUrl: "https://youtu.be/4OxphYV8W3E"
+  },
+  {
+    id: 6,
+    name: "Slow In and Slow Out(スローイン と スローアウト)",
+    summary: "動き始めと動き終わりをゆっくり描く表現",
+    exampleUrl: "https://youtu.be/fQBFsTqbKhY"
+  },
+  {
+    id: 7,
+    name: "Arcs(運動曲線)",
+    summary: "自然な動きは直線ではなく曲線を描く",
+    exampleUrl: "https://youtu.be/I1_tZ9LhJD4"
+  },
+  {
+    id: 8,
+    name: "Secondary Action(副次アクション)",
+    summary: "メインの動作を補強し、キャラクターの感情や性格を引き立てる動き.箱を開ける時（メイン）、手をさすって楽しみ感を出すなど",
+    exampleUrl: "https://youtu.be/MjBHWw1TbP4"
+  },
+  {
+    id: 9,
+    name: "Timing(タイミング)",
+    summary: "動作の速度やフレームの感覚で重厚感などを表現すること",
+    exampleUrl: "https://youtu.be/BarOk2p38LQ"
+  },
+  {
+    id: 10,
+    name: "Exaggeration(誇張)",
+    summary: "動きや表情をデフォルメして、意図を明確にする",
+    exampleUrl: "https://youtu.be/HfFj-VQKiAM"
+  },
+  {
+    id: 11,
+    name: "Solid Drawing(立体感のある描画)",
+    summary: "立体感、重量感のある画作り．左右対称にならないようにすること，重心をずらすなど",
+    exampleUrl: "https://youtu.be/7An0jukOkCI"
+  },
+    {
+    id: 12,
+    name: "Appeal(アピール)",
+    summary: "より魅力的に見えるようなキャラクターデザイン.全体的な形・プロポーション・シンプル化など",
+    exampleUrl: "https://youtu.be/_SplEuWp0Yw"
+  }
+  
+  
+];
+
+// 一覧表示
+app.get("/animation", (req, res) => {
+  res.render('animation', {data: principlesOfAnimation} );
+});
+
+// 新規登録画面の表示
+app.get("/animation/create", (req, res) => {
+  res.redirect('/public/animation_new.html');
+});
+
+// 詳細表示
+app.get("/animation/:number", (req, res) => {
+  const number = req.params.number;
+  const detail = principlesOfAnimation[ number ];
+  res.render('animation_detail', {id: number, data: detail} );
+});
+
+// 新規登録の実行
+app.post("/animation", (req, res) => {
+  const id = principlesOfAnimation.length + 1;
+  const name = req.body.name;
+  const summary = req.body.summary;
+  principlesOfAnimation.push( { id: id, name: name, summary: summary} );
+  console.log( principlesOfAnimation );
+  res.render('animation', {data: principlesOfAnimation} );
+});
+
+// 編集画面の表示
+app.get("/animation/edit/:number", (req, res) => {
+  const number = req.params.number;
+  const detail = principlesOfAnimation[ number ];
+  res.render('animation_edit', {id: number, data: detail} );
+});
+
+// 削除確認画面の表示
+app.get("/animation/deleteCheck/:number", (req, res) => {
+  const number = req.params.number;
+  const detail = principlesOfAnimation[ number ];
+  res.render('animation_delete', {id: number, data: detail} );
+});
+
+// 更新の実行
+app.post("/animation/update/:number", (req, res) => {
+  principlesOfAnimation[req.params.number].name = req.body.name;
+  principlesOfAnimation[req.params.number].summary = req.body.summary;
+  console.log( principlesOfAnimation );
+  res.redirect('/animation' );
+});
+
+// 削除の実行
+app.post("/animation/delete/:number", (req, res) => {
+  principlesOfAnimation.splice( req.params.number, 1 );
+  res.redirect('/animation' );
+});
+
+
 app.listen(8080, () => console.log("Example app listening on port 8080!"));
