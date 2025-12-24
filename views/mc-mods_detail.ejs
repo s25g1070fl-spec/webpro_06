@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title><%= data.name %> の詳細</title>
+</head>
+<body>
+  <h1>MOD「<%= data.name %>」の詳細</h1>
+
+  <table>
+    <tr><th>項目</th><th>データ</th></tr>
+    <tr><td>MOD名</td><td><%= data.name %></td></tr>
+    <tr><td>URL</td><td><a href="<%= data.url %>" target="_blank"><%= data.url %></a></td></tr>
+    <tr><td>対応バージョン</td><td><%= data.version %></td></tr>
+    <tr><td>前提MOD/Loader</td><td><%= data.loader %></td></tr>
+    <tr><td>概要</td><td><%= data.summary %></td></tr>
+  </table>
+
+  <hr>
+
+  <a href="/mc-mods/edit/<%= id %>">このMODの情報を編集する</a>
+  <br>
+  <a href="/mc-mods/deleteCheck/<%= id %>">このMODの情報を削除する</a>
+  <br>
+  <br>
+  <a href="/mc-mods">MOD一覧に戻る</a>
+
+</body>
+</html>

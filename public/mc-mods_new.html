@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Minecraft MODの新規登録</title>
+</head>
+<body>
+    <h1>Minecraft MODの新規登録</h1>
+    <form action="/mc-mods" method="POST">
+        <!-- フォームの action を /mc-mods に変更 -->
+
+        <label for="name">MOD名:</label><br>
+        <input type="text" id="name" name="name" required size="50"><br>
+        <br>
+
+        <label for="url">URL:</label><br>
+        <input type="text" id="url" name="url" required size="50"><br>
+        <br>
+
+        <label for="version">対応バージョン:</label><br>
+        <input type="text" id="version" name="version" required size="50"><br>
+        <br>
+
+        <label for="loader">前提MOD/Loader:</label><br>
+        <input type="text" id="loader" name="loader" required size="50"><br>
+        <br>
+
+        <label for="summary">概要:</label><br>
+        <textarea id="summary" name="summary" rows="4" cols="50" required></textarea><br>
+        <br>
+
+        <input type="submit" value="登録する">
+        <a href="/mc-mods">キャンセル</a>
+        <!-- キャンセル時のリンク先も /mc-mods に変更 -->
+    </form>
+</body>
+</html>

@@ -95,6 +95,12 @@ app.post("/keiyo2/delete/:number", (req, res) => {
 });
 
 
+
+
+
+//----------BGMサイト-----------
+
+
 let ncm = [
   { 
     id: 1, 
@@ -233,6 +239,165 @@ app.post("/ncm/delete/:number", (req, res) => {
   // 本来ならここにDBとのやり取りが入る
   ncm.splice( req.params.number, 1 );
   res.redirect('/ncm' );
+});
+
+
+
+
+
+//----------高難易度化MinecraftMod-------------
+
+let difficult_McMods = [
+  {
+    "id": 1,
+    "name": "Improved Mobs (Forge)",
+    "url": "https://www.curseforge.com/minecraft/mc-mods/improved-mobs",
+    "version": "1.16.5",
+    "loader": "Forge",
+    "summary": "時間経過と共に難易度が上昇する。バニラの敵がプレイヤーの装備を着たり、エンダーパールやTNTなどのアイテムを使いこなしたり、ブロックを破壊して拠点を襲撃したりするようになる。"
+  },
+  {
+    "id": 2,
+    "name": "Creeper AI Updated",
+    "url": "https://www.curseforge.com/minecraft/mc-mods/creeper-ai-updated",
+    "version": "1.16.5",
+    "loader": "Forge",
+    "summary": "クリーパーのAIのみを特化して強化する。壁を爆破して他の敵の侵入経路を作ったり、爆発のタイミングがより致命的になったりする。"
+  },
+  {
+    "id": 3,
+    "name": "Tantrum",
+    "url": "https://www.curseforge.com/minecraft/mc-mods/tantrum",
+    "version": "1.16.5",
+    "loader": "Forge",
+    "summary": "敵モブにRPGのような「レベル」制を導入する。レベルの高い敵は移動速度や攻撃力が上がり、強力なエンチャント付きの防具を装備してスポーンする。"
+  },
+  {
+    "id": 4,
+    "name": "L2 Hostility",
+    "url": "https://www.curseforge.com/minecraft/mc-mods/l2hostility",
+    "version": "1.20.1",
+    "loader": "Forge",
+    "summary": "プレイヤーの進行度に合わせて敵が強化される。敵が特殊能力を持ったりレベルが上がったりする他、現在のエリアの危険度が表示されるようになる。"
+  },
+  {
+    "id": 5,
+    "name": "Enhanced AI",
+    "url": "https://www.curseforge.com/minecraft/mc-mods/enhanced-ai",
+    "version": "1.20.1",
+    "loader": "Forge",
+    "summary": "敵の知能を強化する。クリーパーが壁を爆破して侵入経路を作ったり、スケルトンが超長距離射撃を行ったり、ボートハメなどの安地対策が施される。"
+  },
+  {
+    "id": 6,
+    "name": "Enhanced Hordes",
+    "url": "https://www.curseforge.com/minecraft/mc-mods/enhanced-hordes",
+    "version": "1.20.1",
+    "loader": "Forge",
+    "summary": "敵の群れ（ホード）の挙動を強化する。索敵範囲内の敵が一斉に襲ってくるほか、攻撃が届かない場所にいるプレイヤーに対してジャンプ攻撃を仕掛けてくる。"
+  },
+  {
+    "id": 7,
+    "name": "Epic Mob Siege: Nightmare",
+    "url": "https://www.curseforge.com/minecraft/mc-mods/epic-mob-siege-nightmare",
+    "version": "1.20.1",
+    "loader": "Forge",
+    "summary": "敵による拠点襲撃（シージ）を極悪化する。ゾンビがブロックを積んで高い場所に登ってきたり、リスポーン地点となるベッドを破壊したりする。"
+  },
+  {
+    "id": 8,
+    "name": "Nyf's Spiders",
+    "url": "https://www.curseforge.com/minecraft/mc-mods/nyfs-spiders",
+    "version": "1.20.1",
+    "loader": "Forge",
+    "summary": "クモの挙動をリアルにする。壁や天井をスムーズに這い回るようになり、予測不能な動きで攻撃を当てにくくさせる。"
+  },
+  {
+    "id": 9,
+    "name": "Epic Siege Mod",
+    "url": "https://www.curseforge.com/minecraft/mc-mods/epic-siege-mod",
+    "version": "1.12.2",
+    "loader": "Forge",
+    "summary": "敵AIを極悪化する。ゾンビがブロックを破壊・設置して拠点を襲撃したり、クリーパーが壁を爆破して侵入経路を作ったりする。中立モブも反撃するようになる。"
+  },
+  {
+    "id": 10,
+    "name": "Rough Mobs Revamped",
+    "url": "https://www.curseforge.com/minecraft/mc-mods/rough-mobs-revamped",
+    "version": "1.12.2",
+    "loader": "Forge",
+    "summary": "バニラの敵モブに強力な能力を追加する。クモが巣を飛ばして拘束したり、スケルトンの装備が強化されたり、クリーパーが加速したりする。"
+  },
+  {
+    "id": 11,
+    "name": "IncreaseMobs",
+    "url": "https://www.curseforge.com/minecraft/mc-mods/increasemobs",
+    "version": "1.12.2",
+    "loader": "Forge",
+    "summary": "モブのスポーン数を増加させる。個々の強さだけでなく、圧倒的な「数」の暴力で難易度を底上げする。"
+  }
+]
+
+// 一覧表示
+app.get("/mc-mods", (req, res) => {
+  res.render('mc-mods', {data: difficult_McMods} );
+});
+
+// 新規登録画面の表示
+app.get("/mc-mods/create", (req, res) => {
+  // 実際には public/mc-mods_new.html を作成する必要があります
+  res.redirect('/public/mc-mods_new.html');
+});
+
+// 詳細表示
+app.get("/mc-mods/:number", (req, res) => {
+  const number = req.params.number;
+  const detail = difficult_McMods[ number ];
+  res.render('mc-mods_detail', {id: number, data: detail} );
+});
+
+// 新規登録の実行
+app.post("/mc-mods", (req, res) => {
+  const id = difficult_McMods.length + 1;
+  const name = req.body.name;
+  const url = req.body.url;
+  const version = req.body.version;
+  const loader = req.body.loader;
+  const summary = req.body.summary;
+  difficult_McMods.push( { id: id, name: name, url: url, version: version, loader: loader, summary: summary} );
+  console.log( difficult_McMods );
+  res.render('mc-mods', {data: difficult_McMods} );
+});
+
+// 編集画面の表示
+app.get("/mc-mods/edit/:number", (req, res) => {
+  const number = req.params.number;
+  const detail = difficult_McMods[ number ];
+  res.render('mc-mods_edit', {id: number, data: detail} );
+});
+
+// 削除確認画面の表示
+app.get("/mc-mods/deleteCheck/:number", (req, res) => {
+  const number = req.params.number;
+  const detail = difficult_McMods[ number ];
+  res.render('mc-mods_delete', {id: number, data: detail} );
+});
+
+// 更新の実行
+app.post("/mc-mods/update/:number", (req, res) => {
+  difficult_McMods[req.params.number].name = req.body.name;
+  difficult_McMods[req.params.number].url = req.body.url;
+  difficult_McMods[req.params.number].version = req.body.version;
+  difficult_McMods[req.params.number].loader = req.body.loader;
+  difficult_McMods[req.params.number].summary = req.body.summary;
+  console.log( difficult_McMods );
+  res.redirect('/mc-mods' );
+});
+
+// 削除の実行
+app.post("/mc-mods/delete/:number", (req, res) => {
+  difficult_McMods.splice( req.params.number, 1 );
+  res.redirect('/mc-mods' );
 });
 
 

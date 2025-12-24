@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Minecraft 敵強化MODまとめ</title>
+</head>
+<body>
+  <h1>Minecraft 敵強化MODまとめ</h1>
+  <p>Minecraftをよりハードコアに楽しむための、敵を強化するMODの一覧です。</p>
+
+  <table border="1"> <!-- border="1" で枠線を表示 -->
+    <thead>
+      <tr>
+        <th>MOD名</th>
+        <th>対応バージョン</th>
+        <th>Loader</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for( let i = 0; i < data.length; i++ ) { %>
+        <% let row = data[i]; %>
+        <tr>
+          <td><a href="/mc-mods/<%= i %>"><%= row.name %></a></td>
+          <td><%= row.version %></td>
+          <td><%= row.loader %></td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+
+  <br>
+  <a href="/mc-mods/create">新しいMODを追加する</a>
+
+</body>
+</html>
