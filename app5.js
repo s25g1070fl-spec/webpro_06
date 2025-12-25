@@ -170,7 +170,6 @@ let ncm = [
 
 // 一覧
 app.get("/ncm", (req, res) => {
-  // 本来ならここにDBとのやり取りが入る
   res.render('ncm', {data: ncm} );
 });
 
@@ -202,12 +201,8 @@ app.post("/ncm", (req, res) => {
 });
 
 // Edit
-app.get("/ncm/edit/:number", (req, res) => {
-  // 本来ならここにDBとのやり取りが入る
-  const number = req.params.number;
-  const detail = ncm[ number ];
-  res.render('ncm_edit', {id: number, data: detail} );
-});
+
+
 
 // DeleteCheck
 app.get("/ncm/deleteCheck/:number", (req, res) => {
@@ -233,6 +228,7 @@ app.post("/ncm/update/:number", (req, res) => {
   console.log( ncm );
   res.redirect('/ncm' );
 });
+
 //Delete
 app.post("/ncm/delete/:number", (req, res) => {
   // 本来は変更する番号が存在するか，各項目が正しいか厳重にチェックする
@@ -503,7 +499,8 @@ app.post("/animation", (req, res) => {
   const id = principlesOfAnimation.length + 1;
   const name = req.body.name;
   const summary = req.body.summary;
-  principlesOfAnimation.push( { id: id, name: name, summary: summary} );
+  const exampleUrl = req.body.exampleUrl; 
+  principlesOfAnimation.push( { id: id, name: name, summary: summary, exampleUrl: exampleUrl} ); 
   console.log( principlesOfAnimation );
   res.render('animation', {data: principlesOfAnimation} );
 });
@@ -526,6 +523,7 @@ app.get("/animation/deleteCheck/:number", (req, res) => {
 app.post("/animation/update/:number", (req, res) => {
   principlesOfAnimation[req.params.number].name = req.body.name;
   principlesOfAnimation[req.params.number].summary = req.body.summary;
+  principlesOfAnimation[req.params.number].exampleUrl = req.body.exampleUrl; // ★★★ この行を追加 ★★★
   console.log( principlesOfAnimation );
   res.redirect('/animation' );
 });

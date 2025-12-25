@@ -20,6 +20,10 @@
       <td>概要</td>
       <td><%= data.summary %></td>
     </tr>
+    <tr>
+      <td>参考URL</td>
+      <td><a href="<%= data.exampleUrl %>" target="_blank"><%= data.exampleUrl %></a></td>
+    </tr>
   </table>
 
   <hr>
@@ -29,7 +33,7 @@
   <a href="/animation/deleteCheck/<%= id %>">この原則の情報を削除する</a>
   <br>
   <br>
-  <a href="/animation">原則一覧に戻る</a>
+  <a href="/animation">一覧に戻る</a>
 
 </body>
 </html>

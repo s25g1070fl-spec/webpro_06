@@ -18,13 +18,17 @@
         <td>概要</td>
         <td><textarea name="summary" rows="4" cols="50"><%= data.summary %></textarea></td>
       </tr>
+      <tr>
+        <td>参考URL</td>
+        <td><input type="text" name="exampleUrl" value="<%= data.exampleUrl %>" size="50"></td>
+      </tr>
     </table>
     <br>
     <button type="submit">更新する</button>
   </form>
 
   <br>
-  <a href="/animation/<%= id %>">キャンセルして詳細に戻る</a>
+  <a href="/animation/<%= id %>">詳細に戻る</a>
 
 </body>
 </html>

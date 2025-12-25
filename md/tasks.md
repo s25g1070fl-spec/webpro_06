@@ -6,12 +6,12 @@
   - [x] ページ構造の検討 :thinking:
   - [x] ページ遷移の検討 :thinking:
   - [x] HTTPメソッドとリソース名とは何か理解する．
-  - [ ] HTTPメソッドとリソース名の決定
+  - [x] HTTPメソッドとリソース名の決定
   - [x] ページ遷移図の作成 :writing_hand:
   - [x] ページ構造の決定
   - [x] ドキュメントの構成とは何か理解する．
-  - [ ] ドキュメントの構成の検討 :thinking:
-  - [ ] 概要 :writing_hand:
+  - [x] ドキュメントの構成の検討 :thinking:
+  - [x] 概要 :writing_hand:
   - [ ] HTTPメソッドとリソース名一覧 :writing_hand:
   - [ ] データ構造 :writing_hand:
   - [ ] リソース名ごとの機能の詳細 :writing_hand:
@@ -22,7 +22,7 @@
   - [ ] 三っつ分のデータを登録する
     - [x] BGMサイト
     - [x] 敵強化系高難易化MinecraftMod
-    - [ ] 
+    - [x] アニメーションの12の基本原則
 - [ ] 管理者向けドキュメントの構成
   - [ ] インストールから起動までの手順確認 :computer:
   - [ ] インストール方法 :writing_hand:
