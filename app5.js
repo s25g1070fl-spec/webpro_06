@@ -201,6 +201,11 @@ app.post("/ncm", (req, res) => {
 });
 
 // Edit
+app.get("/ncm/edit/:number", (req, res) => {
+  const number = req.params.number;
+  const detail = ncm[ number ];
+  res.render('ncm_edit', {id: number, data: detail} );
+});
 
 
 
